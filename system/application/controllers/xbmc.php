@@ -5,6 +5,7 @@ class xbmc extends Controller {
 	function xbmc()
 	{
 		parent::Controller();	
+		$this->load->model('now_playing');
 	}
 	
 	function index()
@@ -22,15 +23,16 @@ class xbmc extends Controller {
 		$url = $xbmc_url . "xbmcCmds/xbmcHttp?command=getcurrentlyplaying(/usr/share/xbmc/web/thumb".$thumb_code.".jpg)";
 		$data['url'] = $url;
 		//$data['xbmc_url'] = $xbmc_url;
-		$this->load->view('nowPlaying', $data);
+		$this->load->view('nowPlaying/nowPlaying', $data);
 	}
+
 
 	function getVideoShares()  {
 		$xbmc_url = $this->config->item('xbmc_url');
 		$url = $xbmc_url . "xbmcCmds/xbmcHttp?command=GetShares(video)";
 		$data['url'] = $url;
 		//$data['xbmc_url'] = $xbmc_url;
-		$this->load->view('proxy', $data);
+		$this->load->view('proxy/videoShareProxy', $data);
 	}
 
 	function getMusicShares()  {
@@ -38,7 +40,7 @@ class xbmc extends Controller {
 		$url = $xbmc_url . "xbmcCmds/xbmcHttp?command=GetShares(music)";
 		$data['url'] = $url;
 		//$data['xbmc_url'] = $xbmc_url;
-		$this->load->view('proxy', $data);
+		$this->load->view('proxy/musicShareProxy', $data);
 	}
 
 	function getDirectory()  {

@@ -11,8 +11,9 @@
 |	http://example.com/
 |
 */
-$config['base_url']	= "http://localhost/dev/xbmc/";
-$config['xbmc_url']	= "http://desktop:8080/";
+$config['base_url']	= "http://localhost/dev/AjaxXBMCInterface/";
+//$config['xbmc_url']	= "http://desktop:8080/"; 
+$config['xbmc_url']	= "http://localhost:8080/";
 
 $config['version']	= "0.1";
 /*

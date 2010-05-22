@@ -6,6 +6,8 @@
 	
 	<base href="<?php echo $base_url; ?>" />
 	
+	<script src="public/js/common.js" type='text/javascript'></script>
+
 	<script src="public/js/jquery.js" type='text/javascript'></script>
 	<script src="public/js/jquery-ui.js" type='text/javascript'></script>
 	<script src="public/js/jquery.lavalamp.js" type='text/javascript'></script>

@@ -4,7 +4,8 @@ class Home extends Controller {
 
 	function Home()
 	{
-		parent::Controller();	
+		parent::Controller();
+		$this->load->model('now_playing');
 	}
 	
 	function index()
@@ -19,7 +20,7 @@ class Home extends Controller {
 		$data['header'] =  $this->load->view('templates/header', $header);
 		$data['xbmc_url'] = $xbmc_url;
 
-		$this->load->view('home', $data);
+		$this->load->view('home/home', $data);
 	}
 
 	function nowPlaying()
@@ -33,14 +34,36 @@ class Home extends Controller {
 		$data['size'] = $length;
 		$data['xbmc_url'] = $xbmc_url;
 
-		$this->load->view('nowPlayingView', $data);
+		$this->load->view('nowPlaying/nowPlayingView', $data);
+	}
+
+	function currentPlaylist()
+	{
+		$xbmc_url = $this->config->item('xbmc_url');
+		$currentPlaylistBlob =  $this->session->userdata('currentPlaylist');
+		$blocks = explode('|', $currentPlaylistBlob);
+		$length = count($blocks);
+
+		$data['array'] = $blocks;
+		$data['size'] = $length;
+		$data['xbmc_url'] = $xbmc_url;
+
+		$this->load->view('home/currentPlaylist', $data);
+
+	}
+
+	function recentlyPlayed()
+	{
+		$limit = "10";
+		$data['query'] = $this->now_playing->getNowPlayingData($limit);
+		$this->load->view('home/recentlyPlayed', $data);
 	}
 
 	function getVideoShares()
 	{
 		$xbmc_url = $this->config->item('xbmc_url');
-		$nowPlayingBlob =  $this->session->userdata('remote_page');
-		$blocks = explode('|', $nowPlayingBlob);
+		$videoShareBlob =  $this->session->userdata('video_share');
+		$blocks = explode('|', $videoShareBlob);
 		$length = count($blocks);
 
 		$data['array'] = $blocks;
@@ -53,7 +76,7 @@ class Home extends Controller {
 	function getMusicShares()
 	{
 		$xbmc_url = $this->config->item('xbmc_url');
-		$nowPlayingBlob =  $this->session->userdata('remote_page');
+		$nowPlayingBlob =  $this->session->userdata('music_share');
 		$blocks = explode('|', $nowPlayingBlob);
 		$length = count($blocks);
 
